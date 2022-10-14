@@ -5,7 +5,7 @@ export const ThemeContext = createContext(null);
 function App() {
   const [calc, setCalc] = useState("");
   const [result, setRESULT] = useState("");
-  const [theme, setTheme] = useState("light")
+  const [theme, setTheme] = useState("dark")
 
   const ops = ['/', '*', '+', '-', '.'];
 
