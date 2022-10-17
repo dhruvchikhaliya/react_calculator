@@ -5,12 +5,12 @@ export const ThemeContext = createContext(null);
 function App() {
   const [calc, setCalc] = useState("");
   const [result, setRESULT] = useState("");
-  const [theme, setTheme] = useState("dark")
+  const [theme, setTheme] = useState("Light")
 
   const ops = ['/', '*', '+', '-', '.'];
 
   const toggleTheme = () => {
-    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+    setTheme((curr) => (curr === "Light" ? "Dark" : "Light"));
   }
 
   const updateCalc = value => {
@@ -39,6 +39,11 @@ function App() {
   }
 
   const calculate = () => {
+    if (ops.includes(calc.slice(-1))) {
+      const temp = calc.slice(0, -1).toString();
+      setCalc(eval(temp).toString());
+      return;
+    }
     setCalc(eval(calc).toString());
   }
 
@@ -53,9 +58,10 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <div className="App" id={theme}>
+        <button className='theme' onClick={toggleTheme}>{theme}</button>
         <div className="calculator">
           <div className="display">
-            {calc ? <span>({result})</span> : ''}
+            {calc ? <span>({result})</span>   : ''}
             {calc || "0"}
           </div>
           <div className="operators">
